@@ -1,12 +1,14 @@
-package Todo_APP_System;
-
 public class Task {
-    private String taskDescription;
+    private String comments;
 
-    public Task(String taskDescription){
-        this.taskDescription = taskDescription;
+    public Task(String comments){
+        this.comments=comments;
     }
-    public String getTaskDescription(){
-        return this.taskDescription;
+    public String getComments() {
+        return comments;
     }
+    public void setComments(String comments){
+        this.comments=comments;
+    }
+
 }
