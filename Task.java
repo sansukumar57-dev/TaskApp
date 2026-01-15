@@ -1,14 +1,26 @@
+package Task;
+
 public class Task {
-    private String comments;
+    private String description;
+    private String status="Todo";
+    public Task (String description){
 
-    public Task(String comments){
-        this.comments=comments;
-    }
-    public String getComments() {
-        return comments;
-    }
-    public void setComments(String comments){
-        this.comments=comments;
+        this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

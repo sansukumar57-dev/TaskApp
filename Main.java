@@ -84,18 +84,17 @@ public class Main {
                    // System.out.println(userTask.getDescription());
                     for (int i = 0; i <currentUser.getTask().length; i++) {
                         //
-
                         if(currentUser.getTask()[i]==null){
                         currentUser.getTask()[i]=userTask;
                         System.out.print("Description Added: ");
-                        System.out.println(currentUser.getTask()[i].getDescription());
-                            System.out.print(" << Status --");
-                            System.out.print(currentUser.getTask()[i].getStatus());
+                        System.out.print(currentUser.getTask()[i].getDescription());
+                            System.out.print(" Status: ");
+                            System.out.println(currentUser.getTask()[i].getStatus());
 
                         break;
                     }
                     }
-                    System.out.println("User Task is Added ");
+                    System.out.println(" Task is Added ");
                     //when the description is enterd by the user next to say the user that the task is created it simply display in the console that it is created              //
                 }
                 else if(choice==2){
@@ -106,9 +105,51 @@ public class Main {
                             System.out.println("List of the available Tasks ");
                             System.out.print(i+1+ ". ");
                             System.out.print(currentUser.getTask()[i].getDescription());
-                            System.out.print(" << Status --");
+                            System.out.print(" --");
                             System.out.print(currentUser.getTask()[i].getStatus());
-                          //  System.out.print(" ---");
+                            System.out.println(" --");
+                            System.out.println("If you want to Update Your Status: YES||NO");
+                            String statusOption=new String(sc.nextLine());
+                            Integer options=0;
+                            if (statusOption.equals("YES")){
+                                System.out.println("Select the Status of task ");
+                                System.out.println("1.Todo");
+                                System.out.println("2.In-Progress");
+                                System.out.println("3.Done");
+                                System.out.println("Pick any number: ");
+                                 options=new Integer(sc.nextLine());
+                                if(options.equals(1)) {
+                                    currentUser.getTask()[i].setStatus("Todo");
+                                    System.out.print(i+1+" ");
+                                    System.out.print(currentUser.getTask()[i].getDescription());
+                                    System.out.print(" is in $");
+                                    System.out.println(currentUser.getTask()[i].getStatus());
+                                }
+                                else if(options.equals(2)) {
+                                    currentUser.getTask()[i].setStatus("In-Progress");
+                                    System.out.print(i+1+" ");
+                                    System.out.print(currentUser.getTask()[i].getDescription());
+                                    System.out.print(" is in $");
+                                    System.out.println(currentUser.getTask()[i].getStatus());
+                                }  else if (options.equals(3)) {
+                                    currentUser.getTask()[i ].setStatus("Done");
+                                    System.out.print(i+1+" ");
+                                    System.out.print(currentUser.getTask()[i].getDescription());
+                                    System.out.print(" is in $");
+                                    System.out.println(currentUser.getTask()[i].getStatus());
+                                }
+                                else{
+                                    System.out.println("select correct option ");
+                                }
+
+
+                            }
+                            else if(statusOption.equals("NO")){
+                                continue;
+                            }
+
+                            System.out.print(currentUser.getTask()[i].getDescription()+" ");
+                            System.out.print(currentUser.getTask()[i].getStatus());
                             System.out.println();
                             isTask=true;
                         }
@@ -116,6 +157,9 @@ public class Main {
                         System.out.println("no task is there ");
                     }
                     //
+                } else if (choice==6) {
+                    //show the available list
+
                 } else if (choice==3) {
                     //update
                     boolean update=false;
