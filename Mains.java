@@ -1,213 +1,189 @@
+package Some;
+
+
+import java.util.*;
 import java.util.Scanner;
-
-class Mains {
-
-   public static void main(String[] args) {
-
-       Scanner sc=new Scanner(System.in);
-       User[] currentUsers=new User[5];
-       boolean existUser=false;
-       int current=0;
-       {
-           System.out.println("welcome to Todays Task");
-           System.out.println("Enter username");
-           String userName = sc.nextLine();
-
-           User currentUser;
-           if(!existUser){
-               currentUser = new User(userName);
-               currentUsers[current]=currentUser;
-           }
-           else{
-            currentUser =  currentUsers[current];
-           }
-
-
-           Integer choice = 0;
-           while (choice != 5) {
-               System.out.print("Welcome ");
-               System.out.println(currentUser.getUserName());
-
-               System.out.println("Choose any number");
-               System.out.println("1.Create Task");
-               System.out.println("2.Remove Task");
-               System.out.println("3.Update Task");
-               System.out.println("4.Show Tasks");
-               System.out.println("5.Exit Task");
-               System.out.println();
-
-               System.out.println("Your choice");
-               choice = new Integer(sc.nextInt());
-               sc.nextLine();
-
-               //  Task createdTask=null;
-               if (choice == 1) {
-                   System.out.println("Enter your description");
-                   String description = sc.nextLine();
-                   Task createdTask = new Task(description);
-                   for (int i = 0; i < currentUser.getTask().length; i++) {
-                       if (currentUser.getTask()[i] == null) {
-                           currentUser.getTask()[i] = createdTask;
-                           break;
-                       }
-                   }
-                   System.out.println("Task is created ++");
-
-               } else if (choice == 2) {
-                   for (int i = 0; i < currentUser.getTask().length; i++) {
-                     if(currentUser.getTask()!=null){
-                         System.out.print(i+1);
-                         System.out.print(" : ");
-                         System.out.print(currentUser.getTask()[i].getComments());
-                     }
-                   }
-                   System.out.println("pick option to removed the task");
-                   Integer choi=new Integer(sc.nextLine());
-                   currentUser.getTask()[choi-1]=null;
-               } else if (choice == 3) {
-
-                   for (int i = 0; i < currentUser.getTask().length; i++) {
-                       if(currentUser.getTask()!=null){
-                           System.out.println(i+1);
-                           System.out.println(" : ");
-                           System.out.println(currentUser.getTask()[i].getComments());
-                           existUser=true;
-                       }
-                   }
-                   if(!existUser){
-                       System.out.println("not upadted task");
-                       continue;
-                   }
-                   System.out.println("pick option to update the task");
-                   Integer choi=new Integer(sc.nextLine());
-                   System.out.println("Enter the description ");
-                  String newComments=sc.nextLine();
-                   currentUser.getTask()[choi-1].setComments(newComments);
-                   System.out.println("updated the task");
-               } else if (choice == 4) {
-                   Task[] tasks= currentUser.getTask();
-                   boolean found=false;
-
-                   System.out.println("Your tasks");
-                   for (int i = 0; i < tasks.length; i++) {
-                       if(tasks[i]!=null){
-                           System.out.println(i+1);
-                           System.out.println(" : ");
-                           System.out.println(currentUser.getTask()[i].getComments());
-                           found=true;
-                       }
-
-                   }
-                   if(!found){
-                       System.out.println("no task is contain");
-                   }
-               } else {
-                   System.out.println("Exited successfully");
-               }
-
-           }
-
-
-       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//int[] a  =new int[5];
-//        System.out.println("whatbefore............");
-//        for (int i = 0; i < a.length; i++) {
-//            System.out.println(" "+i+" "+a[i]);
-//        }
-//
-//        System.out.println("whatafter..............");
-//        for(int i=0;i<a.length;i++){
-//            a[i]=i+3;
-//            System.out.println(" "+i+" "+a[i]);
-//        }
-//        System.out.println("whatdelete....................");
-//        int n=a.length;
-//        for(int i=1;i<a.length-1;i++){
-//            a[i]=a[i]+1;
-//            n=(a.length)-1;
-//        }
-//        System.out.println("Array after declaration");
-//        for(int i=0;i<n;i++){
-//            System.out.println(" "+i+" "+a[i]);
-//        }
-//        System.out.println("search");
-//        for (int i = 0; i <n ; i++)
-//        {if(a[i]==5){
-//            System.out.println(3+" "+i);
-//        }
-//
-//        }
-     //   System.out.println("array elements are ");
-//        for(int i=1;i<a.length;i++){
-//            a[i]=a[i]+2;
-//            System.out.println(i+" "+a[i]+" ");
-//        }
-
-
+class Todo {
+    int id;
+    String title;
+    String status; // todo, in-progress, done
+
+    Todo(int id, String title, String status) {
+        this.id = id;
+        this.title = title;
+        this.status = status;
+    }
+
+    public String toString() {
+        return id + " | " + title + " | " + status;
+    }
+}
+
+
+class TodoService {
+    List<Todo> todos = new ArrayList<>();
+
+    // CREATE
+    void addTodo(Todo todo) {
+        todos.add(todo);
+        System.out.println("Todo added");
+    }
+
+    // READ
+    void viewTodos() {
+        if (todos.isEmpty()) {
+            System.out.println("No todos found");
+            return;
+        }
+        for (Todo t : todos) {
+            System.out.println(t);
+        }
+    }
+
+    // UPDATE
+    void updateStatus(int id, String newStatus) {
+        for (Todo t : todos) {
+            if (t.id == id) {
+                t.status = newStatus;
+                System.out.println("Status updated");
+                return;
+            }
+        }
+        System.out.println("Todo not found");
+    }
+
+    // DELETE
+    void deleteTodo(int id) {
+        Iterator<Todo> it = todos.iterator();
+        while (it.hasNext()) {
+            if (it.next().id == id) {
+                it.remove();
+                System.out.println("Todo deleted");
+                return;
+            }
+        }
+        System.out.println("Todo not found");
+    }
+
+    // SEARCH by ID
+    void searchById(int id) {
+        for (Todo t : todos) {
+            if (t.id == id) {
+                System.out.println(t);
+                return;
+            }
+        }
+        System.out.println("Todo not found");
+    }
+
+    // SEARCH by Title
+    void searchByTitle(String keyword) {
+        for (Todo t : todos) {
+            if (t.title.toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println(t);
+            }
+        }
+    }
+
+    // FILTER by Status
+    void filterByStatus(String status) {
+        for (Todo t : todos) {
+            if (t.status.equalsIgnoreCase(status)) {
+                System.out.println(t);
+            }
+        }
+    }
+
+    // SORT by Title
+    void sortByTitle() {
+        todos.sort(Comparator.comparing(t -> t.title));
+    }
+
+    // SORT by ID desc
+    void sortByIdDesc() {
+        todos.sort((a, b) -> b.id - a.id);
+    }
+}
+
+
+
+public class Mains {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        TodoService service = new TodoService();
+
+        while (true) {
+            System.out.println("\n--- TODO APP ---");
+            System.out.println("1. Add Todo");
+            System.out.println("2. View Todos");
+            System.out.println("3. Update Status");
+            System.out.println("4. Delete Todo");
+            System.out.println("5. Search by ID");
+            System.out.println("6. Search by Title");
+            System.out.println("7. Filter by Status");
+            System.out.println("8. Sort by Title");
+            System.out.println("9. Exit");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Id: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Title: ");
+                    String title = sc.nextLine();
+                    System.out.print("Status(todo/in-progress/done): ");
+                    String status = sc.nextLine();
+                    service.addTodo(new Todo(id, title, status));
+                    break;
+
+                case 2:
+                    service.viewTodos();
+                    break;
+
+                case 3:
+                    System.out.print("Todo Id: ");
+                    id = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("New Status: ");
+                    status = sc.nextLine();
+                    service.updateStatus(id, status);
+                    break;
+
+                case 4:
+                    System.out.print("Todo Id: ");
+                    id = sc.nextInt();
+                    service.deleteTodo(id);
+                    break;
+
+                case 5:
+                    System.out.print("Todo Id: ");
+                    id = sc.nextInt();
+                    service.searchById(id);
+                    break;
+
+                case 6:
+                    System.out.print("Keyword: ");
+                    title = sc.nextLine();
+                    service.searchByTitle(title);
+                    break;
+
+                case 7:
+                    System.out.print("Status: ");
+                    status = sc.nextLine();
+                    service.filterByStatus(status);
+                    break;
+
+                case 8:
+                    service.sortByTitle();
+                    System.out.println("Sorted by title");
+                    break;
+
+                case 9:
+                    System.exit(0);
+            }
+        }
     }
 }
