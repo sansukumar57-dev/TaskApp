@@ -1,220 +1,260 @@
-package Task1;
+package Task;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        User[] users = new User[6];
-        Integer choice = 0;
-        User availableUser = null;
-        int userPositionArray = 0;
-        boolean findUser;
+        Scanner sc = new Scanner(System.in);
+        User[] users = new User[5];
         while (true) {
-            System.out.println("Welcome to Task Manager ");
-            System.out.println("Welcome to Task Manager ");
-            System.out.println("Enter the userName: ");
-            String userName = scanner.nextLine();
-
-            findUser = false;
+            System.out.println("Welcome to the task manager");
+            //1.it for introducing my self to the user
+            String userName=null;
+            try {
+                System.out.println("Enter the user name:");
+                //2.it for saying the user to enter your name
+                userName = sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Enter the valid 'a to z'  String ");
+            }
+            //3.if the user enter his name then i get his name through by gettig the address of the scannerand called the scanner class and it give me the methods to communcate withe terminal and main throug ht the String reference variable
+            // now the user gave this name that i stored in the string object and i stored in the reference variable.
+            boolean findUser = false;
+            int userPositionArray = 0;
 
             for (int i = 0; i < users.length; i++) {
                 if (users[i] == null) {
                     continue;
                 }
-                if (users[i].getName().equals(userName)) {
-                    findUser = true;
-                    userPositionArray = i;
+                if (users[i].getUserName().equals(userName)){
+                    findUser=true;
+                    userPositionArray=i;
                     break;
-                }
-
-
-            }
+            }  }
+            User currentUser;
             if (findUser == false) {
-                availableUser = new User(userName);
+                currentUser = new User(userName);
                 for (int i = 0; i < users.length; i++) {
                     if (users[i] == null) {
-                        users[i] = availableUser;
+                        users[i] = currentUser;
                         break;
-                    }
-
+                   }
 
                 }
             } else {
-                availableUser = users[userPositionArray];
+                currentUser = users[userPositionArray];
                 System.out.println("User is already Exists");
             }
+            Integer choice = 0;
+            //Autoboxing
+      while(choice!=9){
 
+        System.out.print("welcome ");
+        //4.after the user type his name in the terminal i stored in the reference variable inside the string object where it is datatype.Then now i displaying the user before i display the welcome in the terminal .
+                //asking back directly to the user that Enter any option
+        System.out.println(currentUser.getUserName());
+        //it prints in the console
+        //5.here i calling the currentuser it gives me the useraddress and by the address i call the userclassObject and it give me contract that has the method to communicate with the main and terminal
+        //call the currentuser and it give the address using the address mulaiyama ennaku contract ketaichadu addu vacchu na  getusenamemethod kupputen and it returns the address of that users what it given in the terminal that already it has know soi get it from the user
 
-            while (choice != 9) {
+                System.out.println("1.Add task");
+                //priting in the terminal to select the 1.option then i can able to store it some what as the integer and by using that integer address
+                System.out.println("2.List of Task To TODO||IN-PROGGRESS||DONE");
+                //printing text in the terminal to show user to select this option then i store the givan value some respective integer class
+                System.out.println("3.Update");//for this also
+                System.out.println("4.Delete");// fro this also
+                System.out.println("5.List  the available Tasks-in TODO");
+                System.out.println("6.List  the available Tasks-in In-Progress");
+                System.out.println("7.List  the available Tasks-in Done");
+                System.out.println("8.List All the task");
+                System.out.println("9.Exit");//for this also
+
                 try {
-                    System.out.println("What all you can do with me!!");
-                    System.out.println("1.Add Task");
-                    System.out.println("2.Update");
-                    System.out.println("3.Delete");
-                    System.out.println("4.List of all Task");
-                    System.out.println("5.Update the status ");
-                    System.out.println("6.All TODO");
-                    System.out.println("7.All In-Progress");
-                    System.out.println("8.All Done");
-                    System.out.println("9.Exit");
-                    System.out.println("Enter your choice");
-                    choice = new Integer(scanner.nextLine());
-                }catch (Exception e){
-                    System.out.println("Please enter the number only ");
-                    choice=0;
-                    continue;
-                }
-
-                if (choice == 1) {
-                    System.out.println("Enter the descripition");
-                    String description = scanner.nextLine();
-                    Task task = new Task(description);
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] == null) {
-                            availableUser.getTasks()[i] = task;
-                            break;
-                        }
-                    }
-                    System.out.println("task is created ");
+                    System.out.print("Enter your choice: ");//now i force the user t enter some integer in the terminal so i can store some where and take it from ther an compare the number with si=ome boolean
                     System.out.println();
-                } else if (choice == 2) {
-                    System.out.println("To Update task select the number ");
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] != null) {
-                            System.out.print(1 + i + ". ");
-                            System.out.println(availableUser.getTasks()[i].getDescription());
-                        }
-                    }
-                    System.out.println("Select the choice ");
-                    Integer option = new Integer(scanner.nextLine());
-                    System.out.println("Enter the new Description ");
-                    String newDescription = scanner.nextLine();
-                    availableUser.getTasks()[option - 1].setDescription(newDescription);
-                } else if (choice == 3) {
-                    System.out.println("To delete the task select the number");
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] != null) {
-                            System.out.print(1 + i + ". ");
-                            System.out.println(availableUser.getTasks()[i].getDescription());
-                        }
-                    }
-                    System.out.println("Select the choice ");
-                    Integer option = new Integer(scanner.nextLine());
-                    availableUser.getTasks()[option - 1] = null;
-                } else if (choice == 4) {
-                    System.out.println("List of tasks ");
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] != null) {
-                            System.out.print(1 + i + ". ");
-                            System.out.print(availableUser.getTasks()[i].getDescription());
-                            System.out.print("(");
-                            System.out.print(availableUser.getTasks()[i].getStatus());
-                            System.out.println(")");
-                            System.out.println();
-                        }
-                    }
-                } else if (choice == 5) {
-                    System.out.println("List of tasks to update the status ");
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] != null) {
-                            System.out.print(1 + i + ". ");
-                            System.out.print(availableUser.getTasks()[i].getDescription());
-                            System.out.print("(");
-                            System.out.print(availableUser.getTasks()[i].getStatus());
-                            System.out.println(")");
-                        }
-                    }
-                    System.out.println("Enter the task number ");
-                    Integer taskChoice = new Integer(scanner.nextLine());
-                    if (availableUser.getTasks()[taskChoice - 1] != null) {
-                        System.out.println("Enter the number to update the status ");
-                        System.out.println("1.TODO");
-                        System.out.println("2.In-Progress");
-                        System.out.println("3.Done");
-                        Integer statusChoice = new Integer(scanner.nextLine());
-                        if (statusChoice == 1) {
-                            String changeStatus = "TODO";
-                            availableUser.getTasks()[taskChoice - 1].setStatus(changeStatus);
-                        } else if (statusChoice == 2) {
-                            String changeStatus = "In-Progress";
-                            availableUser.getTasks()[taskChoice - 1].setStatus(changeStatus);
-                        } else if (statusChoice == 3) {
-                            String changeStatus = "DONE";
-                            availableUser.getTasks()[taskChoice - 1].setStatus(changeStatus);
-                        } else {
-                            System.out.println("Check it once ");
-                        }
-                    }
-                } else if (choice == 6) {
-                    boolean flag = false;
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] != null) {
-                            if (availableUser.getTasks()[i].getStatus().equals("TODO") || availableUser.getTasks()[i].getStatus().equals("Todo")) {
-                                System.out.print(1 + i + ". ");
-                                System.out.print(availableUser.getTasks()[i].getDescription());
-                                System.out.print("(");
-                                System.out.print(availableUser.getTasks()[i].getStatus());
-                                System.out.println(")");
-                                flag = true;
-                            }
-                        }
-                    }
-                    if (flag == false) {
-                        System.out.println("No todo are here ");
-                    }
-                } else if (choice == 7) {
-                    boolean flag = false;
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] != null) {
-                            if (availableUser.getTasks()[i].getStatus().equals("In-Progress")) {
-                                System.out.print(1 + i + ". ");
-                                System.out.print(availableUser.getTasks()[i].getDescription());
-                                System.out.print("(");
-                                System.out.print(availableUser.getTasks()[i].getStatus());
-                                System.out.println(")");
-
-                            }
-                        }
-                    }
-                    if (flag == false) {
-                        System.out.println("No In-Progress status are here ");
-                    }
-                } else if (choice == 8) {
-                    boolean flag = false;
-                    for (int i = 0; i < availableUser.getTasks().length; i++) {
-                        if (availableUser.getTasks()[i] != null) {
-                            if (availableUser.getTasks()[i].getStatus().equals("DONE")) {
-                                System.out.print(1 + i + ". ");
-                                System.out.print(availableUser.getTasks()[i].getDescription());
-                                System.out.print("(");
-                                System.out.print(availableUser.getTasks()[i].getStatus());
-                                System.out.println(")");
-                                flag = true;
-                            }
-                        }
-                    }
-                    if (flag == false) {
-                        System.out.println("No DONE status are here ");
-                    }
-
-                } else {
-                    System.out.println("Exit come again");
+                    choice = new Integer(sc.nextLine());
+                } catch (Exception e) {
+                    System.out.println("Please enter the correct Number");
                 }
+                //when the user give some thing in the terminal i saying the terminal that now you get only integer .
+                //by seeing the new keyword it created the objects and the object called integer that convert the string into int value because of wrapper class
+                //
+                if(choice==1){
+                    // her the choice of Integer is converted into the value so only it wold be compared with ( == ) to 1 because it is in the range
+                    System.out.print("Enter the description: ");
+                    //I print in the console that you would be display
+                    String description=sc.nextLine();
+                    //giting the address from the scanner and call the scanner then it give the contract of the scanner and i take the nextline method to get the input from the terminal and finally it now has the address that i going to store in the description.
+                    //it sores the strings address
+                    Task userTask=new Task(description);
+                    //by seeing the new keyword it creates the object inside the java memory model in the heap meory
+                    //it gives the address and now i store in the variable
+                    //now it has the userdefinded task constructor description it stores in the instance variable
+                   // System.out.println(userTask.getDescription());
+                    for (int i = 0; i <currentUser.getTask().length; i++) {
+                        //
+                        if(currentUser.getTask()[i]==null){
+                        currentUser.getTask()[i]=userTask;
+                        System.out.print("Description Added: ");
+                        System.out.print(currentUser.getTask()[i].getDescription());
+                            System.out.print(" Status: ");
+                            System.out.println(currentUser.getTask()[i].getStatus());
 
+                        break;
+                    }
+                    }
+                    System.out.println(" Task is Added ");
+                    //when the description is enterd by the user next to say the user that the task is created it simply display in the console that it is created              //
+                }
+                else if(choice==2){
+                    //list
+                    boolean isTask=false;
+                    for (int i = 0; i < currentUser.getTask().length; i++) {
+                        if(currentUser.getTask()[i]!=null) {
+                            System.out.println("List of the available Tasks ");
+                            System.out.print(i+1+ ". ");
+                            System.out.print(currentUser.getTask()[i].getDescription());
+                            System.out.print(" --");
+                            System.out.print(currentUser.getTask()[i].getStatus());
+                            System.out.println(" --");
+                            System.out.println("If you want to Update Your Status: YES||NO");
+                            String statusOption=new String(sc.nextLine());
+                            Integer options=0;
+                            if (statusOption.equals("YES")){
+                               try {
+                                   System.out.println("Select the Status of task ");
+                                   System.out.println("1.Todo");
+                                   System.out.println("2.In-Progress");
+                                   System.out.println("3.Done");
+                                   System.out.println("Pick any number: ");
+                                   options = new Integer(sc.nextLine());
+
+                                   if (options.equals(1)) {
+                                       currentUser.getTask()[i].setStatus("TODO");
+                                       System.out.print(i + 1 + " ");
+                                       System.out.print(currentUser.getTask()[i].getDescription());
+                                       System.out.print(" is in $");
+                                       System.out.println(currentUser.getTask()[i].getStatus());
+                                   } else if (options.equals(2)) {
+                                       currentUser.getTask()[i].setStatus("In-Progress");
+                                       System.out.print(i + 1 + " ");
+                                       System.out.print(currentUser.getTask()[i].getDescription());
+                                       System.out.print(" is in $");
+                                       System.out.println(currentUser.getTask()[i].getStatus());
+                                   } else if (options.equals(3)) {
+                                       currentUser.getTask()[i].setStatus("Done");
+                                       System.out.print(i + 1 + " ");
+                                       System.out.print(currentUser.getTask()[i].getDescription());
+                                       System.out.print(" is in $");
+                                       System.out.println(currentUser.getTask()[i].getStatus());
+                                   } else {
+                                       System.out.println("select correct option ");
+                                   }
+                               } catch (Exception e) {
+                                   System.out.println("Enter  the correct option");
+                               }
+
+
+                            }
+                            else if(statusOption.equals("NO")){
+                                continue;
+                            }
+
+                            System.out.print(currentUser.getTask()[i].getDescription()+" ");
+                            System.out.print(currentUser.getTask()[i].getStatus());
+                            System.out.println();
+                            isTask=true;
+                        }
+                    }if(isTask==false){
+                        System.out.println("no task is there ");
+                    }
+                    //
+                }
+                else if (choice==3) {
+                    //update
+                    boolean update=false;
+                    for(int i=0;i<currentUser.getTask().length;i++){
+                        if(currentUser.getTask()[i]!=null){
+                            System.out.print(i+1+" ");
+                            System.out.println(currentUser.getTask()[i].getDescription());
+                            update=true;
+                        }
+
+                    }
+                    if(update==false){
+                        System.out.println("no available update for now");
+                    }
+                    System.out.println("Enter the number between <10 to update:");
+
+                    Integer up=new Integer(sc.nextLine());
+                    System.out.println("Enter the description to update");
+                    String updated= sc.nextLine();
+                    currentUser.getTask()[up-1].setDescription(updated);
+                    System.out.println(currentUser.getTask()[up-1].getDescription());
+                    currentUser.getTask()[up-1].setStatus("In progress");
+                    System.out.println(currentUser.getTask()[up-1].getStatus());
+                }
+                else if (choice==4) {
+                    for (int i = 0; i < currentUser.getTask().length; i++) {
+                        if (currentUser.getTask()[i]!=null){
+                            System.out.print(i+1+" ");
+                            System.out.println(currentUser.getTask()[i].getDescription());
+                        }
+                    }
+                    System.out.println("Enter the number  between <10 to delete ");
+                    Integer delete=new Integer(sc.nextLine());
+                    currentUser.getTask()[delete-1]=null;
+
+                }
+                else if (choice==5) {
+                    System.out.println("The Task TODO ");
+                    for (int i = 0; i < currentUser.getTask().length; i++) {
+                        if(currentUser.getTask()[i]!=null) {
+                            if (currentUser.getTask()[i].getStatus().equals("TODO")) {
+                                System.out.print(currentUser.getTask()[i].getDescription()+" : ");
+                                System.out.println(currentUser.getTask()[i].getStatus());                            }
+                        }
+                    }
+
+                }
+                else if (choice==6) {
+                    //show the available list
+                    System.out.println("The Task In-Progress ");
+                    for (int i = 0; i < currentUser.getTask().length; i++) {
+                        if(currentUser.getTask()[i]!=null) {
+                            if (currentUser.getTask()[i].getStatus().equals("In-Progress")) {
+                                System.out.print(currentUser.getTask()[i].getDescription()+" : ");
+                                System.out.println(currentUser.getTask()[i].getStatus());
+                            continue;
+                            }
+                        }
+                    }                            System.out.println("No tasks are in progresss");
+
+
+                }
+                else if(choice==7){
+                    System.out.println("The Task DONE ");
+                    for (int i = 0; i < currentUser.getTask().length; i++) {
+                        if(currentUser.getTask()[i]!=null) {
+                            if (currentUser.getTask()[i].getStatus().equals("Done")) {
+                                System.out.print(currentUser.getTask()[i].getDescription()+" : ");
+                                System.out.println(currentUser.getTask()[i].getStatus());
+                            }
+                        }
+                    }
+                } else if (choice==8) {
+                    System.out.println("LIST OF AVAILABLE TASKS ");
+
+                    for (int i = 0; i < currentUser.getTask().length; i++) {
+                        if(currentUser.getTask()[i]!=null) {
+                                System.out.print(currentUser.getTask()[i].getDescription()+" : ");
+                                System.out.println(currentUser.getTask()[i].getStatus());
+                        }
+                    }
+                } else {
+                    System.out.println("EXIT from Task ");
+                }
             }
-        }
-
-//    static void showTask() {
-//
-//
-//        for (int i = 0; i < availableUser.getTasks().length; i++) {
-//            if (availableUser.getTasks()[i] != null) {
-//                System.out.println(availableUser.getTasks()[i].getDescription());
-//            }
-//
-//        }
-//
-//    }
+        }//inprogress-working  done-have to do todo-starting
     }
 }
