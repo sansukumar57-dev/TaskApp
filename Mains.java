@@ -23,7 +23,7 @@ public class Mains {
                     findUser=true;
                     userPositionArray=i;
                     break;
-                    }
+                }
             }
             if(findUser==false){
                 availableUser=new User(username);
@@ -35,9 +35,10 @@ public class Mains {
                 }
             }else{
                 availableUser=users[userPositionArray];
+                System.out.println("Welcome Back" );
             }
             choice = 0;
-            while (choice!=7) {
+            while (choice!=5) {
                 System.out.println("Available features");
                 System.out.println("1.Add the task");
                 System.out.println("2.Show the task");
@@ -47,6 +48,7 @@ public class Mains {
                 System.out.println("Choose any Option ");
                 choice = new Integer(sc.nextLine());
                 if (choice == 1) {
+
                     System.out.println("Enter the description:");
                      description = sc.nextLine();
                     Task task = new Task(description);
@@ -57,6 +59,13 @@ public class Mains {
                         }
                     }
                     System.out.println("Your Task is created Success fully ");
+                    for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                        if (availableUser.getAvailableTask()[i] != null) {
+                            System.out.print((i + 1) + ". ");
+                            System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                        }
+                    }
+
                 }
                 else if (choice == 2)
                 {
@@ -65,49 +74,7 @@ public class Mains {
                         if (availableUser.getAvailableTask()[i] != null) {
                             System.out.print(i + 1 + ". ");
                             System.out.println(availableUser.getAvailableTask()[i].getDescription());
-                            System.out.println("   Status: " + availableUser.getAvailableTask()[i].getStatus());
                         }
-                    }
-                    System.out.println("If you want to update the Status Enter 'YES||NO' ");
-                    String updateStatus=sc.nextLine();
-                    if(updateStatus.equals("YES")||updateStatus.equals("yse")||updateStatus.equals("Yes")) {
-                        System.out.print("Enter the Task number to change the Description Status: ");
-                        Integer statusNumber = new Integer(sc.nextLine());
-                        statusNumber = statusNumber - 1;
-                        System.out.println();
-                        System.out.println("Enter the Status");
-                        System.out.println("1.ToDo");
-                        System.out.println("2.In-Progress");
-                        System.out.println("3.Done");
-                        System.out.print("Pick the 1|2|3: ");
-                        Integer statusOption = new Integer(sc.nextLine());
-                        if (statusOption == 1) {
-                            String toDo = "ToDo";
-                            availableUser.getAvailableTask()[statusNumber].setStatus(toDo);
-                            }
-                       else if (statusOption == 2) {
-                            String inProgress = "In-Progress";
-                            availableUser.getAvailableTask()[statusNumber].setStatus(inProgress);
-                           }
-                      else  if (statusOption == 3) {
-                            String doNe = "Done";
-                            availableUser.getAvailableTask()[statusNumber].setStatus(doNe);
-                        }
-                      else{
-                            System.out.println("Enter the correct StatusOption ");
-                        }
-                        System.out.println(" UpdatedStatus:->");
-                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
-                            if (availableUser.getAvailableTask()[i] != null) {
-                                System.out.print(i + 1 + ". ");
-                                System.out.print(availableUser.getAvailableTask()[i].getDescription());
-                                System.out.print("  CurrentStatus: ");
-                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
-                            }
-                        }
-                    }
-                    else{
-                        System.out.println("You Don't want to update the Status");
                     }
                 }
                 else if(choice==3)
@@ -123,8 +90,52 @@ public class Mains {
                         System.out.print("Enter the New Description: ");
                         wantToUpdateDescription=sc.nextLine();
                         availableUser.getAvailableTask()[wantToUpdateChoice-1].setDescription(wantToUpdateDescription);
+                    System.out.println();
+                    System.out.println("If you want to update the Status Enter 'YES||NO' ");
+                    String updateStatus=sc.nextLine();
+                    if(updateStatus.equals("YES")||updateStatus.equals("yes")||updateStatus.equals("Yes")) {
+                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            if (availableUser.getAvailableTask()[i]!=null){
+                                System.out.print(i+1+". ");
+                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                            }
+                        }
+                        System.out.print("Enter the Task number to change the Description Status: ");
+                        Integer statusNumber = new Integer(sc.nextLine());
+                        statusNumber = statusNumber - 1;
+                        System.out.println();
+                        System.out.println("Enter the Status");
+                        System.out.println("1.ToDo");
+                        System.out.println("2.In-Progress");
+                        System.out.println("3.Done");
+                        System.out.print("Pick the 1|2|3: ");
+                        Integer statusOption = new Integer(sc.nextLine());
+                        if (statusOption == 1) {
+                            String toDo = "ToDo";
+                            availableUser.getAvailableTask()[statusNumber].setStatus(toDo);
+                        }
+                        else if (statusOption == 2) {
+                            String inProgress = "In-Progress";
+                            availableUser.getAvailableTask()[statusNumber].setStatus(inProgress);
+                        }
+                        else  if (statusOption == 3) {
+                            String doNe = "Done";
+                            availableUser.getAvailableTask()[statusNumber].setStatus(doNe);
+                        }
+                        else{
+                            System.out.println("Enter the correct StatusOption ");
+                        }
+                        {
+                            System.out.println(availableUser.getAvailableTask()[statusNumber].getStatus());
+                        }
+                    }
+                    else{
+                        System.out.println("You Don't want to update the Status");
+                    }
                 }
-                    else if(choice==4) {
+                else if(choice==4)
+                    {
+                        Task[] newTasks = new Task[availableUser.getAvailableTask().length];
                     System.out.println("Enter the number to delete the task");
                     for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                         if (availableUser.getAvailableTask()[i] != null) {
@@ -138,23 +149,27 @@ public class Mains {
                     wantToDeleteChoice = new Integer(sc.nextLine());
                     // wantToDeleteChoice=wantToDeleteChoice-1;
                     availableUser.getAvailableTask()[wantToDeleteChoice - 1] = null;
-                    Task[] newTasks = new Task[availableUser.getAvailableTask().length];
+                        if (availableUser.getAvailableTask()[wantToDeleteChoice-1] == null) {
+                            System.out.println("Invalid choice");
+                            continue;
+                        } else if (wantToDeleteChoice < 0) {
+                            System.out.println("Invalid choice");
+                            continue;
+                        }
                     int num = 0;
                     for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                         if (availableUser.getAvailableTask()[i] != null) {
                             newTasks[num] = availableUser.getAvailableTask()[i];
                             num++;
+
                         }
                     }
+                    for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            availableUser.getAvailableTask()[i]=newTasks[i];
+                        }
+
                     availableUser.setAvailableTask(newTasks);
-                    if (availableUser.getAvailableTask()[wantToDeleteChoice] == null) {
-                        System.out.println("Invalid choice");
-                        continue;
-                    } else if (wantToDeleteChoice < 0) {
-                        System.out.println("Invalid choice");
-                        continue;
-                    }
-                    System.out.println(" Deleted tasks:");
+
                     for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                         if (newTasks[i] != null) {
                             System.out.print((i + 1) + ". ");
@@ -163,10 +178,9 @@ public class Mains {
                             System.out.println(availableUser.getAvailableTask()[i].getStatus());
                         }
                     }
-                }
-
-                 else {
+                } else {
                     System.out.println("Come Again! NextTime ");
+                    break;
                 }
             }
 
@@ -174,6 +188,8 @@ public class Mains {
 
     }
 
+// System.out.print("  CurrentStatus: ");
+//                            System.out.println(availableUser.getAvailableTask()[i].getStatus());
 
 }
 
