@@ -1,20 +1,27 @@
-package Task;
+package Some.TODO;
 
 public class User {
-    private  String userName;
-private Task[] task=new Task[10];
-    public User(String userName){
-        this.userName = userName;
-    }
-    public String getUserName(){
-        return userName;
+
+    private String name;
+    private Task[] availableTask=new Task[10];
+
+    public  User(String name) {
+        this.name = name;
     }
 
-    public Task[] getTask() {
-        return task;
+    public String getName() {
+        return name;
     }
 
-    public void setTask(Task[] task) {
-        this.task = task;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Task[] getAvailableTask() {
+        return availableTask;
+    }
+
+    public void setAvailableTask(Task[] availableTask) {
+        this.availableTask = availableTask;
     }
 }
