@@ -1,79 +1,68 @@
 package Some.TODO;
-
-
 import java.util.Scanner;
 
 public class TaskManager {
     Scanner sc = new Scanner(System.in);
-    //  private   User availableUser ;
     private Task task;
     private Integer wantToUpdateChoice, wantToDeleteChoice;
-    private String description, wantToUpdateDescription;
-
+    private String title, description, wantToUpdateDescription,wantToUpdateTitle;
 
     //Add task
     public void addTask(User availableUser) {
         boolean exitTask = false;
         while (!exitTask) {
+            System.out.println("Enter the Title:");
+            title = sc.nextLine();
+            if(title.isEmpty()){
+                continue;
+            }
             System.out.println("Enter the description:");
             description = sc.nextLine();
-            task = new Task(description);
+            task = new Task(title, description);
             boolean addTask = false;
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (availableUser.getAvailableTask()[i] == null) {
                     availableUser.getAvailableTask()[i] = task;
                     addTask = true;
                     break;
-
                 }
             }
             if (!addTask) {
                 System.out.println("task is filled");
             }
             System.out.println("Your Task is created Success fully ");
-
-
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (availableUser.getAvailableTask()[i] != null) {
+                    System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
                     System.out.print((i + 1) + ". ");
                     System.out.println(availableUser.getAvailableTask()[i].getDescription());
-
                 }
             }
-            System.out.println("If you want to exit(yes|no) ");
+            System.out.println("If you want to continue ");
             String exited = sc.nextLine();
             if (exited.equals("yes")) {
                 exitTask = true;
                 break;
-            } else {
-                continue;
             }
-
+            break;
         }
         if (exitTask) {
             System.out.println("You exit");
         }
-
-
     }
-
 // showTask
-
     public void showTask(User availableUser) {
-
         boolean exitTask = false;
-
-
         while (!exitTask) {
             boolean addTask = false;
             System.out.println("The available Tasks you created ");
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (availableUser.getAvailableTask()[i] != null) {
+                    System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
                     System.out.print(i + 1 + ". ");
                     System.out.println(availableUser.getAvailableTask()[i].getDescription());
                     addTask = true;
                 }
-
             }
             if (addTask) {
                 System.out.println("If you want to exit(yes|no) ");
@@ -81,16 +70,13 @@ public class TaskManager {
                 if (exited.equals("yes")) {
                     exitTask = true;
                     break;
-                } else {
-                    continue;
                 }
             }
         }
-
-
+        if(exitTask){
+            System.out.println("Exit ");
+        }
     }
-
-
     public void updateTask(User availableUser) {
         boolean exitTask = false;
         while (!exitTask) {
@@ -98,12 +84,17 @@ public class TaskManager {
             System.out.println("Enter the number to update the task");
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (availableUser.getAvailableTask()[i] != null) {
+                    System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
                     System.out.print(i + 1 + ". ");
                     System.out.println(availableUser.getAvailableTask()[i].getDescription());
                 }
             }
             System.out.print("Pick the choice: ");
             wantToUpdateChoice = new Integer(sc.nextLine());
+            System.out.print("Change the Title: ");
+            wantToUpdateTitle=new String(sc.nextLine());
+            availableUser.getAvailableTask()[wantToUpdateChoice-1].setTitle(wantToUpdateTitle);
+
             System.out.print("Enter the New Description: ");
             wantToUpdateDescription = sc.nextLine();
             availableUser.getAvailableTask()[wantToUpdateChoice - 1].setDescription(wantToUpdateDescription);
@@ -113,17 +104,16 @@ public class TaskManager {
             if (updateStatus.equals("YES") || updateStatus.equals("yes") || updateStatus.equals("Yes")) {
                 for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                     if (availableUser.getAvailableTask()[i] != null) {
+                        System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
                         System.out.print(i + 1 + ". ");
                         System.out.println(availableUser.getAvailableTask()[i].getDescription());
                         addTask = true;
-
                     }
                 }
                 System.out.print("Enter the Task number to change the Description Status: ");
                 Integer statusNumber = new Integer(sc.nextLine());
                 statusNumber = statusNumber - 1;
                 System.out.println();
-
                 System.out.println("Enter the Status");
                 System.out.println("1.ToDo");
                 System.out.println("2.In-Progress");
@@ -154,17 +144,11 @@ public class TaskManager {
             if (exited.equals("yes")) {
                 exitTask = true;
                 break;
-            } else {
-                continue;
             }
         } if (exitTask) {
             System.out.println("You exit");
         }
-
-
     }
-
-
     public void deleteTask(User availableUser) {
         boolean exitTask = false;
         while (!exitTask) {
@@ -172,6 +156,7 @@ public class TaskManager {
             System.out.println("Enter the number to delete the task");
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (availableUser.getAvailableTask()[i] != null) {
+                  //  System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
                     System.out.print(i + 1 + ". ");
                     System.out.println(availableUser.getAvailableTask()[i].getDescription());
                     System.out.print("  CurrentStatus: ");
@@ -184,11 +169,8 @@ public class TaskManager {
             availableUser.getAvailableTask()[wantDel] = null;
             if (availableUser.getAvailableTask()[wantDel - 1] == null && wantDel < 0) {
                 System.out.println("Invalid choice");
-                //continue
-
+                continue;
             }
-            // newTasks[wantDel]=null;
-
             int num = 0;
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (availableUser.getAvailableTask()[i] != null) {
@@ -197,40 +179,35 @@ public class TaskManager {
                     availableUser.getAvailableTask()[i] = newTasks[i];
                 }
             }
-//                    for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
-//                            availableUser.getAvailableTask()[i]=newTasks[i];
-//                        }
-
-            availableUser.setAvailableTask(newTasks);
-
+            //availableUser.setAvailableTask(newTasks);
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (newTasks[i] != null) {
+                    System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
                     System.out.print((i + 1) + ". ");
-                    System.out.println(newTasks[i].getDescription());
+                    System.out.println(availableUser.getAvailableTask()[i].getDescription());
                     System.out.print("  CurrentStatus: ");
                     System.out.println(availableUser.getAvailableTask()[i].getStatus());
                 }
             }
+//            for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+//                if (newTasks[i] != null) {
+//                    System.out.println("==== " + newTasks[i].getTitle() + " ====");
+//                    System.out.print((i + 1) + ". ");
+//                    System.out.println(newTasks[i].getDescription());
+//                    System.out.print("  CurrentStatus: ");
+//                    System.out.println(newTasks[i].getStatus());
+//                }
+//            }
             System.out.println("If you want to exit(yes|no) ");
             String exited = sc.nextLine();
             if (exited.equals("yes")) {
                 exitTask = true;
                 break;
-            } else {
-                continue;
             }
-
-
         }
         if (exitTask) {
             System.out.println("You exit");
         }
-
-
     }
-
-
-
-
 }
 

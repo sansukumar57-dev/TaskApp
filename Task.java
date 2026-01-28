@@ -3,10 +3,11 @@ package Some.TODO;
 public class Task {
     private  String description;
     private String Status;
-
+    private String title;
     public  Task(){}
-    public Task(String description){
+    public Task(String title,String description){
         this.description=description;
+        this.title=title;
         this.Status="ToDo";
     }
 
@@ -24,5 +25,13 @@ public class Task {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
