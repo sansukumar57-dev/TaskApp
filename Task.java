@@ -5,8 +5,8 @@ public class Task {
     private String Status;
     private String title;
     public  Task(){}
-    public Task(String title,String description){
-        this.description=description;
+    public Task(String title){
+        this.description=null;
         this.title=title;
         this.Status="ToDo";
     }

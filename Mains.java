@@ -1,7 +1,7 @@
 package Some.TODO;
 import java.util.Scanner;
 public class Mains {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Scanner sc= new Scanner(System.in);
         User[] users=new User[4];
         Integer choice;
@@ -60,11 +60,12 @@ public class Mains {
                     System.out.println("Come Again! NextTime ");
                     break;
                 }
+                }
 
-
-
-
-                //System.out.println("5.List of task with status");
+        }
+    }
+}
+//System.out.println("5.List of task with status");
 //                else if (choice==5) {
 //
 //                    for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
@@ -75,10 +76,3 @@ public class Mains {
 //                    System.out.println(availableUser.getAvailableTask()[i].getStatus());
 //                }
 //            }
-
-
-            }
-
-        }
-    }
-}
