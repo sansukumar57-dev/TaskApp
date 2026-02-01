@@ -10,7 +10,8 @@ public class TaskManager {
     //Add task
     public void addTask(User avilableUser){
         boolean exit=false;
-        while(!exit){
+        while(!exit)
+        {
             boolean taskIsNotFull=false;
             for (int i = 0; i < avilableUser.getAvailableTask().length; i++) {
                 if (avilableUser.getAvailableTask()[i]==null){
@@ -18,6 +19,10 @@ public class TaskManager {
                     break;
                 }
             }
+            if(taskIsNotFull==false){
+                System.out.println("task is already fill");
+            }
+
             for (int i = 0; i < avilableUser.getAvailableTask().length; i++) {
                 if ( avilableUser.getAvailableTask()[i]!=null){
                     System.out.println("Available Tasks");
@@ -25,9 +30,7 @@ public class TaskManager {
                     System.out.println( avilableUser.getAvailableTask()[i].getTitle());
                 }
             }
-            if(taskIsNotFull==false){
-                System.out.println("task is already fill");
-            }
+
             if(taskIsNotFull){
             try {
                 System.out.println("Enter the Title");
@@ -43,6 +46,7 @@ public class TaskManager {
 
                 Task task1 = new Task(title);
                 boolean correctDescriptionOption=false;
+
                 while(!correctDescriptionOption)
                 {
                 System.out.println("If you want to Enter the Description Yes or No");
@@ -56,7 +60,7 @@ public class TaskManager {
                 }
                 else if (desChoice.equals("Yes")) {
                     System.out.println("Enter the Description:");
-                        String des = sc.nextLine();
+                    String des = sc.nextLine();
 
                         if (des.isEmpty()) {
                             System.out.println("Enter the Description first ");
@@ -120,19 +124,12 @@ public class TaskManager {
                     exitTask = true;
                     throw new Exception();
                 }
+                System.out.println("If you want to show the status:");
+                String statusOption=sc.nextLine();
+                if(statusOption.equals("No")){
 
-            } catch (Exception e) {
-                exitTask = true;
-                System.out.println("Exit");
-            }
-        }
-
-        System.out.println("If you want to show the status:");
-        String statusOption=sc.nextLine();
-        if(statusOption.equals("No")){
-
-        }
-        if(statusOption.equals("Yes")) {
+                }
+                if(statusOption.equals("Yes")) {
 
             Integer options = null;
             boolean correctOption = false;
@@ -142,6 +139,7 @@ public class TaskManager {
             System.out.println("2.In-Progress");
             System.out.println("3.Done");
             options = new Integer(sc.nextLine());
+
 
             if (options == 1 ) {
                 correctOption = true;
@@ -216,6 +214,12 @@ public class TaskManager {
             }
 
         }
+    }
+        catch (Exception e) {
+        exitTask = true;
+        System.out.println("Exit");
+    }
+    }
     }
 
 
