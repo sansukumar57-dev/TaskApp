@@ -118,45 +118,56 @@ public class TaskManager {
                         System.out.println(availableUser.getAvailableTask()[i].getStatus());
                     }
                 }
-//              System.out.println("If you want to exit ");
                 String exited = sc.nextLine();
                 if (exited.equals("exit")) {
-                    exitTask = true;
                     throw new Exception();
                 }
                 System.out.println("If you want to show the status:");
                 String statusOption=sc.nextLine();
                 if(statusOption.equals("No")){
-
+                    exitTask=true;
+                }
+                if (exited.equals("exit")) {
+                    throw new Exception();
                 }
                 if(statusOption.equals("Yes")) {
 
             Integer options = null;
             boolean correctOption = false;
+while (!correctOption) {
+    System.out.println("Pick any one if you want to show the list of  status 1|2|3");
+    System.out.println("1.ToDo");
+    System.out.println("2.In-Progress");
+    System.out.println("3.Done");
+    options = new Integer(sc.nextLine());
+    if (exited.equals("exit")) {
+        throw new Exception();
+    }
 
-            System.out.println("Pick any one if you want to show the list of  status 1|2|3");
-            System.out.println("1.ToDo");
-            System.out.println("2.In-Progress");
-            System.out.println("3.Done");
-            options = new Integer(sc.nextLine());
+    if (options == 1) {
+        correctOption = true;
+        break;
+    } else if (options == 2) {
+        correctOption = true;
+        break;
+    } else if (options == 3) {
+        correctOption = true;
+        break;
+    }
+    if (options != 1 || options != 2 || options != 3) {
+        System.out.print("Enter the correct Option: ");
+        correctOption = false;
+        break;
+    }
+}
 
 
-            if (options == 1 ) {
-                correctOption = true;
-            }
-           else if ( options == 2 ) {
-                correctOption = true;
-            } else if ( options == 3) {
-                correctOption = true;
-            }
-
-
-            if (correctOption) {
+            if (correctOption==true) {
                 if (options == 1) {
                     boolean flag = false;
                     for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                         if (availableUser.getAvailableTask()[i] != null) {
-                            if (availableUser.getAvailableTask()[i].getStatus().equals("TODO") || availableUser.getAvailableTask()[i].getStatus().equals("ToDo")) {
+                            if (availableUser.getAvailableTask()[i].getStatus().equals("ToDo") || availableUser.getAvailableTask()[i].getStatus().equals("ToDo")) {
                                 System.out.print(1 + i + ". ");
                                 System.out.print(availableUser.getAvailableTask()[i].getDescription());
                                 System.out.print("(");
@@ -192,7 +203,7 @@ public class TaskManager {
                     boolean flag = false;
                     for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                         if (availableUser.getAvailableTask()[i] != null) {
-                            if (availableUser.getAvailableTask()[i].getStatus().equals("DONE")) {
+                            if (availableUser.getAvailableTask()[i].getStatus().equals("Done")) {
                                 System.out.print(1 + i + ". ");
                                 System.out.print(availableUser.getAvailableTask()[i].getDescription());
                                 System.out.print("(");
@@ -203,7 +214,7 @@ public class TaskManager {
                         }
                     }
                     if (flag == false) {
-                        System.out.println("No DONE status are here ");
+                        System.out.println("No Done status are here ");
                     }
 
                 }
@@ -247,7 +258,6 @@ public class TaskManager {
                 availableUser.getAvailableTask()[wantToUpdateChoice-1].setTitle(wantToUpdateTitle);
             }
             if (option.equals("Description")) {
-
                 System.out.print("Enter the New Description: ");
                 wantToUpdateDescription = sc.nextLine();
                 availableUser.getAvailableTask()[wantToUpdateChoice - 1].setDescription(wantToUpdateDescription);
@@ -372,7 +382,6 @@ public class TaskManager {
             System.out.println("Enter the number to delete the task");
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (availableUser.getAvailableTask()[i] != null) {
-                  //  System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
                     System.out.print(i + 1 + ". ");
                     System.out.println(availableUser.getAvailableTask()[i].getDescription());
 
