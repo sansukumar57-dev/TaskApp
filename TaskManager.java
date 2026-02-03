@@ -262,14 +262,12 @@ while (!correctOption) {
                 wantToUpdateDescription = sc.nextLine();
                 availableUser.getAvailableTask()[wantToUpdateChoice - 1].setDescription(wantToUpdateDescription);
             }
-            else{
-                System.out.println("");
-            }
 
-            System.out.println();
-            System.out.println("If you want to update the Status Enter 'YES||NO' ");
+
+
+            System.out.println("If you want to update the Status Enter 'Yes ||NO' ");
             String updateStatus = sc.nextLine();
-            if (updateStatus.equals("YES") || updateStatus.equals("yes") || updateStatus.equals("Yes")) {
+            if ( updateStatus.equals("Yes")) {
                 for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                     if (availableUser.getAvailableTask()[i] != null) {
                         System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
@@ -375,6 +373,10 @@ while (!correctOption) {
             System.out.println("You exit");
         }
     }
+
+
+
+    /// delete
     public void deleteTask(User availableUser) {
         boolean exitTask = false;
         while (!exitTask) {
@@ -387,23 +389,36 @@ while (!correctOption) {
 
                 }
             }
-            System.out.print("Pick any one: ");
-            wantToDeleteChoice = new Integer(sc.nextLine());
-            int wantDel = wantToDeleteChoice - 1;
-            availableUser.getAvailableTask()[wantDel] = null;
-            if (availableUser.getAvailableTask()[wantDel] == null && wantDel < 0) {
-                System.out.println("Invalid choice");
-                continue;
-            }
-            int num = 0;
-            for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
-                if (availableUser.getAvailableTask()[i] != null) {
-                    newTasks[num] = availableUser.getAvailableTask()[i];
-                    num++;
-                    availableUser.getAvailableTask()[i] = newTasks[i];
+
+
+            try {
+                System.out.print("Pick any one: ");
+                wantToDeleteChoice = new Integer(sc.nextLine());
+                int wantDel = wantToDeleteChoice - 1;
+                availableUser.getAvailableTask()[wantDel] = null;
+                if (availableUser.getAvailableTask()[wantDel] == null && wantDel < 0) {
+                    System.out.println("Invalid choice");
+                    continue;
+                }
+                int num = 0;
+                for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                    if (availableUser.getAvailableTask()[i] != null) {
+                        newTasks[num] = availableUser.getAvailableTask()[i];
+                        num++;
+                        availableUser.getAvailableTask()[i] = newTasks[i];
+                    }
+                }
+
+                System.out.println("If you want to exit(yes|no) ");
+                String exited = sc.nextLine();
+                if (exited.equals("yes")) {
+                    exitTask = true;
+                    break;
                 }
             }
-            //availableUser.setAvailableTask(newTasks);
+            catch (Exception e) {
+                System.out.println("Invalid choice");
+            }
             for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                 if (newTasks[i] != null) {
                     System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
@@ -414,12 +429,8 @@ while (!correctOption) {
                 }
             }
 
-            System.out.println("If you want to exit(yes|no) ");
-            String exited = sc.nextLine();
-            if (exited.equals("yes")) {
-                exitTask = true;
-                break;
-            }
+
+
         }
         if (exitTask) {
             System.out.println("You exit");
