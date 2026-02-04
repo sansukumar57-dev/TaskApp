@@ -19,9 +19,6 @@ public class TaskManager {
                     break;
                 }
             }
-            if(taskIsNotFull==false){
-                System.out.println("task is already fill");
-            }
 
             for (int i = 0; i < avilableUser.getAvailableTask().length; i++) {
                 if ( avilableUser.getAvailableTask()[i]!=null){
@@ -45,8 +42,18 @@ public class TaskManager {
                 }
 
                 Task task1 = new Task(title);
-                boolean correctDescriptionOption=false;
 
+                for (int i = 0; i < avilableUser.getAvailableTask().length; i++)
+                {
+                    if (avilableUser.getAvailableTask()[i] == null)
+                    {
+                        avilableUser.getAvailableTask()[i] = task1;
+                        break;
+                    }
+                }
+                System.out.println("Task is Created");
+
+                boolean correctDescriptionOption=false;
                 while(!correctDescriptionOption)
                 {
                 System.out.println("If you want to Enter the Description Yes or No");
@@ -77,15 +84,7 @@ public class TaskManager {
                     System.out.println("Enter only Yes||No");
                 }
             }
-                    for (int i = 0; i < avilableUser.getAvailableTask().length; i++)
-                    {
-                        if (avilableUser.getAvailableTask()[i] == null)
-                        {
-                            avilableUser.getAvailableTask()[i] = task1;
-                            break;
-                        }
-                    }
-                    System.out.println("Task is Created");
+
             }
             catch (Exception e)
             {
@@ -94,7 +93,6 @@ public class TaskManager {
             }
             }
             else{
-                exit=true;
                 System.out.println("Exit");
             }
         }
@@ -225,81 +223,10 @@ while (!correctOption) {
             }
 
         }
-    }
-        catch (Exception e) {
-        exitTask = true;
-        System.out.println("Exit");
-    }
-    }
-    }
-
-
-    public void updateTask(User availableUser) {
-        boolean updateTask = false;
-        while (!updateTask) {
-            boolean addTask = false;
-            System.out.println("Enter the number to update the task");
-            for (int i = 0; i < availableUser.getAvailableTask().length; i++)
-            {
-                if (availableUser.getAvailableTask()[i] != null) {
-                    System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
-                    System.out.print(i + 1 + ". ");
-                    System.out.println(availableUser.getAvailableTask()[i].getDescription());
-                }
-            }
-            System.out.println("what you want to update Title||Description");
-            String option=sc.nextLine();
-            if(option.equals("Title"))
-            {
-                System.out.print("Pick the choice: ");
-                wantToUpdateChoice = new Integer(sc.nextLine());
-                System.out.print("Change the Title: ");
-                wantToUpdateTitle=new String(sc.nextLine());
-                availableUser.getAvailableTask()[wantToUpdateChoice-1].setTitle(wantToUpdateTitle);
-            }
-            if (option.equals("Description")) {
-                System.out.print("Enter the New Description: ");
-                wantToUpdateDescription = sc.nextLine();
-                availableUser.getAvailableTask()[wantToUpdateChoice - 1].setDescription(wantToUpdateDescription);
-            }
-
-
-
-            System.out.println("If you want to update the Status Enter 'Yes ||NO' ");
-            String updateStatus = sc.nextLine();
-            if ( updateStatus.equals("Yes")) {
-                for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
-                    if (availableUser.getAvailableTask()[i] != null) {
-                        System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
-                        System.out.print(i + 1 + ". ");
-                        System.out.println(availableUser.getAvailableTask()[i].getDescription());
-                        addTask = true;
-                    }
-                }
-                System.out.print("Enter the Task number to change the Description Status: ");
-                Integer statusNumber = new Integer(sc.nextLine());
-                statusNumber = statusNumber - 1;
-                System.out.println();
-                System.out.println("Enter the Status");
-                System.out.println("1.ToDo");
-                System.out.println("2.In-Progress");
-                System.out.println("3.Done");
-                System.out.print("Pick the 1|2|3: ");
-                Integer statusOption = new Integer(sc.nextLine());
-                if (statusOption == 1) {
-                    String toDo = "ToDo";
-                    availableUser.getAvailableTask()[statusNumber].setStatus(toDo);
-                } else if (statusOption == 2) {
-                    String inProgress = "In-Progress";
-                    availableUser.getAvailableTask()[statusNumber].setStatus(inProgress);
-                } else if (statusOption == 3) {
-                    String doNe = "Done";
-                    availableUser.getAvailableTask()[statusNumber].setStatus(doNe);
-                } else {
-                    System.out.println("Enter the correct StatusOption ");
-                }
                 {
-                    System.out.println(availableUser.getAvailableTask()[statusNumber].getStatus());
+                    System.out.println("Enter the number to show the status ");
+                    Integer statusNumber = new Integer(sc.nextLine());
+                    System.out.println(availableUser.getAvailableTask()[statusNumber - 1].getStatus());
                     System.out.println("Pick any one if you want to show the list of  status 1|2|3");
                     System.out.println("1.ToDo");
                     System.out.println("2.In-Progress");
@@ -360,6 +287,80 @@ while (!correctOption) {
                     }
 
                 }
+    }
+        catch (Exception e) {
+        exitTask = true;
+        System.out.println("Exit");
+    }
+    }
+    }
+
+
+    public void updateTask(User availableUser) {
+        boolean updateTask = false;
+        while (!updateTask) {
+            boolean addTask = false;
+            System.out.println("Enter the number to update the task");
+            for (int i = 0; i < availableUser.getAvailableTask().length; i++)
+            {
+                if (availableUser.getAvailableTask()[i] != null) {
+                    System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
+                    System.out.print(i + 1 + ". ");
+                    System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                }
+            }
+            System.out.println("what you want to update Title||Description");
+            String option=sc.nextLine();
+            if(option.equals("Title"))
+            {
+                System.out.print("Pick the choice: ");
+                wantToUpdateChoice = new Integer(sc.nextLine());
+                System.out.print("Change the Title: ");
+                wantToUpdateTitle=new String(sc.nextLine());
+                availableUser.getAvailableTask()[wantToUpdateChoice-1].setTitle(wantToUpdateTitle);
+            }
+            if (option.equals("Description")) {
+                System.out.print("Enter the New Description: ");
+                wantToUpdateDescription = sc.nextLine();
+                availableUser.getAvailableTask()[wantToUpdateChoice - 1].setDescription(wantToUpdateDescription);
+            }
+
+
+
+            System.out.println("If you want to update the Status Enter 'Yes ||NO' ");
+            String updateStatus = sc.nextLine();
+            if ( updateStatus.equals("Yes")) {
+                for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                    if (availableUser.getAvailableTask()[i] != null) {
+                        System.out.println("==== " + availableUser.getAvailableTask()[i].getTitle() + " ====");
+                        System.out.print(i + 1 + ". ");
+                        System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                        addTask = true;
+                    }
+                }
+                System.out.print("Enter the Task number to change the Description Status: ");
+                Integer statusNumber = new Integer(sc.nextLine());
+
+                System.out.println();
+                System.out.println("Enter the Status");
+                System.out.println("1.ToDo");
+                System.out.println("2.In-Progress");
+                System.out.println("3.Done");
+                System.out.print("Pick the 1|2|3: ");
+                Integer statusOption = new Integer(sc.nextLine());
+                if (statusOption == 1) {
+                    String toDo = "ToDo";
+                    availableUser.getAvailableTask()[statusNumber - 1].setStatus(toDo);
+                } else if (statusOption == 2) {
+                    String inProgress = "In-Progress";
+                    availableUser.getAvailableTask()[statusNumber - 1].setStatus(inProgress);
+                } else if (statusOption == 3) {
+                    String doNe = "Done";
+                    availableUser.getAvailableTask()[statusNumber - 1].setStatus(doNe);
+                } else {
+                    System.out.println("Enter the correct StatusOption ");
+                }
+
 
             } else {
                 System.out.println("You Don't want to update the Status");
