@@ -19,20 +19,17 @@ public class TaskManager {
                     break;
                 }
             }
-
+            System.out.println("Available Tasks");
             for (int i = 0; i < avilableUser.getAvailableTask().length; i++) {
                 if ( avilableUser.getAvailableTask()[i]!=null){
-                    System.out.println("Available Tasks");
                     System.out.print(i+1+" ");
                     System.out.println( avilableUser.getAvailableTask()[i].getTitle());
                 }
             }
-
             if(taskIsNotFull){
             try {
                 System.out.println("Enter the Title");
                 String title = sc.nextLine();
-
                 if (title.equals("exit")) {
                     throw new Exception();
                 }
@@ -40,9 +37,7 @@ public class TaskManager {
                     System.out.println("Enter valid Title First");
                     continue;
                 }
-
                 Task task1 = new Task(title);
-
                 for (int i = 0; i < avilableUser.getAvailableTask().length; i++)
                 {
                     if (avilableUser.getAvailableTask()[i] == null)
@@ -58,7 +53,6 @@ public class TaskManager {
                 {
                 System.out.println("If you want to Enter the Description Yes or No");
                 String desChoice = sc.nextLine();
-
                 if (desChoice.equals("No")) {
                     correctDescriptionOption=true;
                 }
@@ -98,9 +92,161 @@ public class TaskManager {
         }
     }
 
+    //show tasks
+    public void showTask(User availableUser){
+        System.out.println("Show All Task List: ");
+        boolean showTaskList=false;
+        while(!showTaskList) {
+            String option=null;
+            try {
+                boolean taskIsThere=false;
+                for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                    if (availableUser.getAvailableTask()[i]!=null){
+                        taskIsThere=true;
+                    }
+
+                }
+                if(taskIsThere==true){
+                    System.out.println("Pick the Number to  show the task list ");
+                    System.out.println("1.Show All Tasks");
+                    System.out.println("2.Show All the Todo");
+                    System.out.println("3.Show All the In-Progress");
+                    System.out.println("4.Show All the Done");
+                     option = sc.nextLine();
+
+                    Integer optionWantToShow = new Integer(option);
+
+                    if (optionWantToShow == 1) {
+                        System.out.println("Tasks: ");
+                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            if (availableUser.getAvailableTask()[i] != null) {
+                                System.out.print(i + 1 + ". ");
+                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
+                                System.out.print("Description: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                                System.out.print("Status: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
+                                System.out.println();
+                            }
+                        }
+                    } else if (optionWantToShow == 2) {
+                        System.out.println("All Todo Lists ");
+                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            if (availableUser.getAvailableTask()[i].getStatus().equals("Todo")) {
+//                            System.out.print(i + 1 + ". ");
+//                            System.out.println(availableUser.getAvailableTask()[i].getStatus());
+//                            System.out.println();
+                                System.out.print(i + 1 + ". ");
+                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
+                                System.out.print("Description: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                                System.out.print("Status: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
+                                System.out.println();
+                            }
+                        }
+
+                    } else if (optionWantToShow == 3) {
+                        System.out.println("All In-Progress Lists ");
+                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            if (availableUser.getAvailableTask()[i].getStatus().equals("In-Progress")) {
+//                            System.out.print(i + 1 + ". ");
+//                            System.out.println(availableUser.getAvailableTask()[i].getStatus());
+//                            System.out.println();
+                                System.out.print(i + 1 + ". ");
+                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
+                                System.out.print("Description: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                                System.out.print("Status: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
+                                System.out.println();
+                            }
+                        }
+
+                    } else if (optionWantToShow == 4) {
+                        System.out.println("All Done Lists ");
+                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            if (availableUser.getAvailableTask()[i].getStatus().equals("Done")) {
+//                            System.out.print(i + 1 + ". ");
+//                            System.out.println(availableUser.getAvailableTask()[i].getStatus());
+//                            System.out.println();
+                                System.out.print(i + 1 + ". ");
+                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
+                                System.out.print("Description: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                                System.out.print("Status: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
+                                System.out.println();
+                            }
+                        }
+
+                    }
+                    else{
+                        System.out.print("No task List is Available for ");
+                        if(optionWantToShow==2){
+                            System.out.println("Todo");
+                        }
+                        if(optionWantToShow==3){
+                            System.out.println("In-Progress");
+                        }if(optionWantToShow==4){
+                            System.out.println("Done");
+                        }
+                    }
+
+                }
+                else{
+                    System.out.println("Task is no Tasks To Show");
+                    showTaskList=true;
+                }
+            }
+                catch (Exception e) {
+                 if (option.equals("exit")) {
+                     System.out.println("Exit ");
+                     showTaskList=true;
+                    }
+
+            }
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // showTask
-    public void showTask(User availableUser)
+    public void showTasks(User availableUser)
     {
         boolean exitTask = false;
         while (!exitTask)
@@ -439,3 +585,57 @@ while (!correctOption) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+=[todo,inprogress,done,todo,inprogress,done,]
+   
+Todo todo = new Todo();// todo store
+Inprogress inProgress=new Inprogress();//inProgress
+Done done=new Done();//Done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */
