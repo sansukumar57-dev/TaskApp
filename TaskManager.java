@@ -114,10 +114,12 @@ public class TaskManager {
                     System.out.println("3.Show All the In-Progress");
                     System.out.println("4.Show All the Done");
                      option = sc.nextLine();
+                    int n=1;
 
                     Integer optionWantToShow = new Integer(option);
 
-                    if (optionWantToShow == 1) {
+
+                    if (optionWantToShow == 1) {;
                         System.out.println("Tasks: ");
                         for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                             if (availableUser.getAvailableTask()[i] != null) {
@@ -130,40 +132,13 @@ public class TaskManager {
                                 System.out.println();
                             }
                         }
+
                     } else if (optionWantToShow == 2) {
                         System.out.println("All Todo Lists ");
+                        //int n=1;
                         for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                             if (availableUser.getAvailableTask()[i].getStatus().equals("Todo")) {
-                                System.out.print(i + 1 + ". ");
-                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
-                                System.out.print("Description: ");
-                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
-                                System.out.print("Status: ");
-                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
-                                System.out.println();
-                            }
-                        }
-
-                    } else if (optionWantToShow == 3) {
-                        System.out.println("All In-Progress Lists ");
-                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
-                            if (availableUser.getAvailableTask()[i].getStatus().equals("In-Progress")) {
-                                System.out.print(i + 1 + ". ");
-                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
-                                System.out.print("Description: ");
-                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
-                                System.out.print("Status: ");
-                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
-                                System.out.println();
-                            }
-                        }
-
-                    } else if (optionWantToShow == 4) {
-                        int n=1;
-                        System.out.println("All Done Lists ");
-                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
-                            if (availableUser.getAvailableTask()[i].getStatus().equals("Done")) {
-                                System.out.print(i  + ". ");
+                                System.out.print(n + ". ");
                                 System.out.println(availableUser.getAvailableTask()[i].getTitle());
                                 System.out.print("Description: ");
                                 System.out.println(availableUser.getAvailableTask()[i].getDescription());
@@ -173,16 +148,38 @@ public class TaskManager {
                                 n++;
                             }
                         }
-                    }
-                    else{
-                        System.out.print("No task List is Available for ");
-                        if(optionWantToShow==2){
-                            System.out.println("Todo");
+
+                    } else if (optionWantToShow == 3) {
+                        System.out.println("All In-Progress Lists ");
+                        //int n=1;
+                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            if (availableUser.getAvailableTask()[i].getStatus().equals("In-Progress")) {
+                                System.out.print(n + ". ");
+                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
+                                System.out.print("Description: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                                System.out.print("Status: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
+                                System.out.println();
+                                n++;
+                            }
+
                         }
-                        if(optionWantToShow==3){
-                            System.out.println("In-Progress");
-                        }if(optionWantToShow==4){
-                            System.out.println("Done");
+
+                    } else if (optionWantToShow == 4) {
+                        System.out.println("All Done Lists ");
+
+                        for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+                            if (availableUser.getAvailableTask()[i].getStatus().equals("Done")) {
+                                System.out.print(n  + ". ");
+                                System.out.println(availableUser.getAvailableTask()[i].getTitle());
+                                System.out.print("Description: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getDescription());
+                                System.out.print("Status: ");
+                                System.out.println(availableUser.getAvailableTask()[i].getStatus());
+                                System.out.println();
+                                n++;
+                            }
                         }
                     }
 
@@ -208,8 +205,7 @@ public class TaskManager {
         boolean update=false;
         while (!update) {
             boolean letUpdateTask = false;
-
-                for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
+            for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                     if (availableUser.getAvailableTask()[i] != null) {
                         letUpdateTask = true;
                     }
@@ -244,10 +240,11 @@ public class TaskManager {
                                     throw new Exception();
                                 }
                                 availableUser.getAvailableTask()[updateNumber - 1].setTitle(updateTitle);
+                                System.out.println("Title is updated successfully ");
                                 update = true;
 
                             }
-                            if (updateOption == 2) {
+                         else if (updateOption == 2) {
                                 for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                                     if (availableUser.getAvailableTask()[i] != null) {
                                         System.out.print(i + 1 + ". ");
@@ -262,10 +259,11 @@ public class TaskManager {
                                     throw new Exception();
                                 }
                                 availableUser.getAvailableTask()[updateNumber - 1].setDescription(updateDescription);
+                                System.out.println("In-Progress is updated successfully ");
                                 update = true;
 
                             }
-                            if (updateOption == 3) {
+                            else if (updateOption == 3) {
                                 for (int i = 0; i < availableUser.getAvailableTask().length; i++) {
                                     if (availableUser.getAvailableTask()[i] != null) {
                                         System.out.print(i + 1 + ". ");
@@ -298,6 +296,7 @@ public class TaskManager {
                                     availableUser.getAvailableTask()[updateNumber - 1].setStatus(done);
                                     update = true;
                                 }
+                                System.out.println("Done is updated successfully ");
                             }
                             else {
                                 System.out.println("Invalid option  ");
