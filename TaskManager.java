@@ -114,8 +114,14 @@ public class TaskManager {
                     System.out.println("3.Show All the In-Progress");
                     System.out.println("4.Show All the Done");
                      option = sc.nextLine();
+                    if (title.equals("exit")) {
+                        throw new Exception();
+                    }
+                    if (title.isEmpty()) {
+                        System.out.println("Enter valid Title First");
+                        continue;
+                    }
                     int n=1;
-
                     Integer optionWantToShow = new Integer(option);
 
 
@@ -185,7 +191,7 @@ public class TaskManager {
 
                 }
                 else{
-                    System.out.println("Task is no Tasks To Show");
+                    System.out.println("Task is not here To Show");
                     showTaskList=true;
                 }
             }
@@ -210,9 +216,10 @@ public class TaskManager {
                         letUpdateTask = true;
                     }
                 }
+            try {
                 if (letUpdateTask == true) {
                     String updateChoice =null;
-                    try {
+
                         while(true) {
                             System.out.println("Enter the option to Update");
                             System.out.println("1.Update Title");
@@ -223,6 +230,10 @@ public class TaskManager {
 
                             if (updateChoice.equals("exit")) {
                                 throw new Exception();
+                            }
+                            if (updateChoice.isEmpty()){
+                                System.out.println("Enter Option First");
+                                continue;
                             }
 
                             if (updateOption == 1) {
@@ -238,6 +249,10 @@ public class TaskManager {
                                 String updateTitle = sc.nextLine();
                                 if (updateTitle.equals("exit")) {
                                     throw new Exception();
+                                }
+                                if(updateTitle.isEmpty()){
+                                    System.out.println("Enter Title First");
+                                    continue;
                                 }
                                 availableUser.getAvailableTask()[updateNumber - 1].setTitle(updateTitle);
                                 System.out.println("Title is updated successfully ");
@@ -257,6 +272,10 @@ public class TaskManager {
                                 String updateDescription = sc.nextLine();
                                 if (updateDescription.equals("exit")) {
                                     throw new Exception();
+                                }
+                                if(updateDescription.isEmpty()){
+                                    System.out.println("Enter Description First");
+                                    continue;
                                 }
                                 availableUser.getAvailableTask()[updateNumber - 1].setDescription(updateDescription);
                                 System.out.println("In-Progress is updated successfully ");
@@ -282,6 +301,10 @@ public class TaskManager {
                                 if (updateStatus.equals("exit")) {
                                     throw new Exception();
                                 }
+                                if(updateStatus.isEmpty() ){
+                                        System.out.println("Enter Status First");
+                                        continue;
+                                }
                                 if(selectStatusChoice==1){
                                     String todo="Todo";
                                     availableUser.getAvailableTask()[updateNumber - 1].setStatus(todo);
@@ -303,17 +326,18 @@ public class TaskManager {
                                 break;
                             }
                         }
-
-
-                    } catch (Exception e) {
-                        System.out.println("Exit");
-                        update = true;
-                    }
                 }
                 else {
                     System.out.println("Empty task cannnot be Update for Update enter the list First");
+                    update=true;
                 }
             }
+            catch (Exception e) {
+                System.out.println("Exit");
+                update = true;
+
+            }
+        }
 
         }
 
@@ -666,7 +690,7 @@ public class TaskManager {
                 String exited = sc.nextLine();
                 if (exited.equals("yes")) {
                     exitTask = true;
-                    break;
+
                 }
             }
             catch (Exception e) {
