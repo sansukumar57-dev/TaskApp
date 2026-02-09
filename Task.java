@@ -1,6 +1,6 @@
 package Some.TODO;
 
-public class Task {
+public class Task implements TaskInterface{
     private  String description;
     private String Status;
     private String title;

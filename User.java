@@ -1,6 +1,6 @@
 package Some.TODO;
 
-public class User {
+public class User implements UserInterface{
 
     private String name;
     private Task[] availableTask=new Task[10];

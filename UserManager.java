@@ -2,11 +2,11 @@ package Some.TODO;
 
 import java.util.Scanner;
 
-public class UserManager {
+public class UserManager implements UserInterface{
     Scanner sc= new Scanner(System.in);
+    User[] users = new User[4];
 
     public User login() {
-        User[] users = new User[4];
         User currentUser = null;
         String username;
         System.out.println("Welcome to Your Task ");
@@ -14,23 +14,18 @@ public class UserManager {
 
         while (!name) {
             System.out.println("Enter your name");
-            username = sc.nextLine();
             try {
+                username = sc.nextLine();
                 if (username.isEmpty()) {
                     throw new Exception();
                 }
-                name = true;
-            } catch (Exception e) {
-                System.out.println("Username should not be Empty ");
-            }
-
-
-            for (int i = 0; i < users.length; i++) {
+                for (int i = 0; i < users.length; i++) {
                 if (users[i] == null) {
                     continue;
                 }
                 if (users[i].getName().equals(username)) {
                     currentUser = users[i];
+                    System.out.println("User is already Exists");
                     System.out.println("Welcome Back");
                     break;
                 }
@@ -44,8 +39,11 @@ public class UserManager {
                     }
                 }
             }
+            name = true;
+            } catch (Exception e) {
+                System.out.println("Username should not be Empty ");
+            }
         }
-
         return currentUser;
 
     }

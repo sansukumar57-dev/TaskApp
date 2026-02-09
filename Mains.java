@@ -31,21 +31,19 @@ public class Mains {
                         continue;
 
                     }
-                    boolean trueChoice = false;
-                    while (!trueChoice) {
+
                         try {
                             choice = new Integer(choices);
                             if (choice < 1 || choice > 5) {
                                 throw new Exception();
                             }
-                            trueChoice = true;
 
                         } catch (Exception e) {
                             System.out.println("=== Enter the valid option first ===");
-                            trueChoice = true;
+                            continue;
                         }
-                    }
-                    if (trueChoice) {
+
+
                         TaskManager taskManager = new TaskManager();
                         if (choice == 1) {
                             taskManager.addTask(currentUser);
@@ -58,7 +56,7 @@ public class Mains {
                         } else if (choice == 5) {
                             throw new Exception();
                         }
-                    }
+
 
 
                 } catch (Exception e) {
